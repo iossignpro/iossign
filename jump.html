@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>跳转中</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .btn {
+            display: inline-block;
+            background: #07C160;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔒 安全跳转</h2>
+        <p id="countdown">3秒后自动跳转...</p>
+        <a href="#" class="btn" id="goBtn">立即访问</a>
+        <a href="javascript:history.back()" class="btn" style="background:#6c757d;">返回</a>
+    </div>
+
+    <script>
+        // 设置要跳转的网址
+        const targetUrl = "https://w10.ttkefu.com/k/linkurl/?t=6C2CGIJ9"; // 在这里修改成您的网址
+        
+        document.getElementById('goBtn').href = targetUrl;
+        
+        let countdown = 3;
+        const timer = setInterval(() => {
+            countdown--;
+            document.getElementById('countdown').textContent = countdown + "秒后自动跳转...";
+            if (countdown <= 0) {
+                clearInterval(timer);
+                window.location.href = targetUrl;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站访问指引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            padding: 40px 30px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .logo {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: block;
+            background: #07C160;
+            color: white;
+            padding: 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-blue {
+            background: #007bff;
+        }
+        .tips {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+        }
+        .url-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 14px;
+            border: 2px dashed #ccc;
+        }
+        .success {
+            display: none;
+            color: #07C160;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚀</div>
+        <h1>网站访问指引</h1>
+        
+        <div class="tips">
+            <strong>由于微信限制，请按以下方式访问：</strong>
+            <ol style="margin: 10px 0; padding-left: 20px;">
+                <li>点击下方"复制链接"按钮</li>
+                <li>打开手机浏览器</li>
+                <li>粘贴链接并访问</li>
+            </ol>
+        </div>
+        
+        <div class="url-box" id="urlDisplay">
+            正在获取链接...
+        </div>
+        
+        <div class="success" id="successMsg">✅ 链接已复制到剪贴板！</div>
+        
+        <button class="btn" onclick="copyUrl()">
+            📋 复制链接
+        </button>
+        
+        <button class="btn btn-blue" onclick="openInBrowser()">
+            🌐 尝试直接打开
+        </button>
+        
+        <div style="margin-top: 20px; font-size: 12px; color: #666;">
+            <p>复制后请到浏览器中粘贴打开</p>
+        </div>
+    </div>
+
+    <script>
+        // Netlify地址 - 修改这里！
+        const mainSiteUrl = 'https://iossign.netlify.app/';
+        
+        // 显示链接
+        document.getElementById('urlDisplay').textContent = mainSiteUrl;
+        
+        // 复制链接功能
+        function copyUrl() {
+            const urlDisplay = document.getElementById('urlDisplay');
+            const successMsg = document.getElementById('successMsg');
+            
+            // 创建临时输入框
+            const tempInput = document.createElement('input');
+            tempInput.value = mainSiteUrl;
+            document.body.appendChild(tempInput);
+            
+            // 选中并复制
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    successMsg.style.display = 'block';
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    alert('复制失败，请手动选择链接复制');
+                }
+            } catch (err) {
+                alert('复制失败，请手动选择链接复制：' + mainSiteUrl);
+            }
+            
+            // 清理
+            document.body.removeChild(tempInput);
+        }
+        
+        // 尝试在浏览器打开
+        function openInBrowser() {
+            window.location.href = mainSiteUrl;
+        }
+        
+        // 页面加载完成后的操作
+        window.onload = function() {
+            console.log('Netlify页面已加载，链接：', mainSiteUrl);
+        };
+    </script>
+</body>
+</html>
